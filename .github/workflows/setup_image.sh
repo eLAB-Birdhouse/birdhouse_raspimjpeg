@@ -6,6 +6,10 @@ if [ "$EUID" != 0 ]; then
     exit $?
 fi
 
+# Get architecture
+echo "Architecture"
+uname -m
+
 # Update and upgrade packages
 sudo apt-get update
 sudo apt-get full-upgrade -y
