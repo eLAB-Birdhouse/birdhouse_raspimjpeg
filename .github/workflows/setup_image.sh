@@ -25,6 +25,6 @@ git clone https://github.com/roberttidey/userland.git
 # Compile project
 cd userland
 sudo chmod +x ./buildme
-./buildme -DCMAKE_TOOLCHAIN_FILE=toolchain_file.cmake
+./buildme  # -DCMAKE_TOOLCHAIN_FILE=toolchain_file.cmake
 
 # cd bin
