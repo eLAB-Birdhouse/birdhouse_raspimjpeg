@@ -13,7 +13,7 @@ uname -m
 # Update and upgrade packages
 sudo apt-get update
 sudo apt-get full-upgrade -y
-sudo apt-get install -y git # cmake
+sudo apt-get install -y git libssl-dev  # cmake
 
 # Download, deflate, build and install cmake
 wget https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1.tar.gz
