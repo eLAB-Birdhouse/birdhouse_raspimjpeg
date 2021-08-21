@@ -22,7 +22,7 @@ jobs:
           base_image: ${{ matrix.base_image }}
           cpu: 'arm1176'
           copy_repository_path: /home/pi/birdhouse_raspimjpeg
-          copy_artifact_path: /home/pi/birdhouse_raspimjpeg/userland/bin
+          copy_artifact_path: /home/pi/birdhouse_raspimjpeg/userland/build/bin
           copy_artifact_dest: ./bin
           optimize_image: yes
           commands: |
