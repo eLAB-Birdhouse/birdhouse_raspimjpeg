@@ -13,8 +13,15 @@ uname -m
 # Update and upgrade packages
 sudo apt-get update
 sudo apt-get full-upgrade -y
+sudo apt-get install -y git # cmake
 
-sudo apt-get install -y git cmake
+# Download, deflate, build and install cmake
+wget https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1.tar.gz
+tar -xf cmake-3.21.1.tar.gz
+cd cmake-3.21.1
+./bootstrap -- -DCMAKE_BUILD_TYPE:STRING=Release
+make
+make install
 
 # Enable camera after next reboot (optional) [not possible with chroot]
 # sudo raspi-config nonint do_camera 0 && sudo reboot
