@@ -20,13 +20,14 @@ wget https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1.tar
 tar -xf cmake-3.21.1.tar.gz
 cd cmake-3.21.1
 ./bootstrap -- -DCMAKE_BUILD_TYPE:STRING=Release
-make
+make -j4
 make install
 
 # Enable camera after next reboot (optional) [not possible with chroot]
 # sudo raspi-config nonint do_camera 0 && sudo reboot
 
 # Clone raspimjpeg code
+cd /home/pi/
 git clone https://github.com/roberttidey/userland.git
 
 # Compile project
