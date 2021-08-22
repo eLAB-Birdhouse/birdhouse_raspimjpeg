@@ -8,7 +8,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        base_image: ['raspios_lite:2021-05-07', 'raspios_lite:2021-03-04']
+        base_image: ['raspios_lite:2021-05-07']
 
     steps:
       - name: Checkout birdhouse_raspimjpeg
@@ -31,19 +31,22 @@ jobs:
             # Installation process
             sudo /bin/bash /home/pi/birdhouse_raspimjpeg/.github/workflows/setup_image.sh
 
-      # - name: Compress the release image with PiShrink
-      #   run: |
-      #     mv ${{ steps.arm_runner_install.outputs.image }} elab_birdhouse-${{ matrix.base_image  }}.img
-      #     sudo apt-get update && sudo apt-get install -y detox tar
-      #     detox -r -v ./*
-      #     image_name=$(ls *.img)
-      #     wget https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh
-      #     sudo bash pishrink.sh -s -Z -a ${image_name}
+      - name: Compress the release image with PiShrink
+        run: |
+          mv ${{ steps.arm_runner_install.outputs.image }} elab_birdhouse-${{ matrix.base_image  }}.img
+          sudo apt-get update && sudo apt-get install -y detox tar
+          detox -r -v ./*
+          image_name=$(ls *.img)
+          wget https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh
+          sudo bash pishrink.sh -s -Z -a ${image_name}
   
       - name: Upload the image artifact
         uses: actions/upload-artifact@v2
         with:
-          name: release_images
-          path: ./bin
+          name: release_image_and_bins
+          path: |
+            ./bin
+            ./*.img.xz
+            
           if-no-files-found: error
-          retention-days: 1
+          retention-days: 30
